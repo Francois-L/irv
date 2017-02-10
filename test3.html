@@ -90,7 +90,7 @@ $(function() {
 			var div = document.createElement('div');
 			i++;
 			div.setAttribute("id", "box_" + i);		
-			div.innerHTML = dynamicValue1 + ' - ' + dynamicValue2 + '<img id="working" src="logo.png" /><ul id="ulid" class="menu"><li id="over">Terminé</li><li id="delete">Supprimer</li></ul>' ;			
+			div.innerHTML = dynamicValue1 + ' - ' + dynamicValue2 + '<img id="working" src="logo.png" /><ul id="ulid-'+ i +'" class="menu"><li id="over-'+ i +'">Terminé</li><li id="delete">Supprimer</li></ul>' ;			
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
 		
 		

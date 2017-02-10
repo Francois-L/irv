@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Le titre du document</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css">
+	<script src="jquery-3.1.1.js"></script>
+	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css">
+	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
+
+</head>
+
+<body>
+
+  
+
+<div class="container">
+  <header class="page-header">
+	<h1>Illdo</h1>
+	<h2>Réaliser.</h2>
+  
+  </header>
+</div>
+  
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<form class="generate" method="post">
+				<input type="text" class="generate-input" placeholder="Objectif" maxlength="35">
+				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
+				<input type="submit" class="generate-submit" value="Créer l'objectif">
+			</form>		
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<section class="row">
+    <div id="links">
+
+	</div>
+	</section>
+</div>
+				
+				
+				
+<script>
+
+
+		function dynamicEvent1(links) {
+			alert('Hey, ya eu un clic sur ' + $(this).attr('id') + ' !')
+			
+		}
+		
+		function dynamicEvent2(links) {
+			alert('ho');
+		}
+
+$(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker").on("change",function(){
+        var selected = $(this).val();
+    });
+});
+
+
+(function(){
+	
+	var $ = function (selector) {
+		return document.querySelector(selector);
+	};
+	var links = $('#links').getElementsByTagName('div');
+	
+		var div = links[i];
+	for (var i = 0; i < links.length; i++) {
+	}
+	
+	$('.generate').onsubmit = function() {	
+		var dynamicValue1 = $('.generate-input').value;
+		var dynamicValue2 = $('#datepicker').value;
+		
+		if(!dynamicValue1 || !dynamicValue2) {
+			alert('Veuillez remplir les 2 champs');
+		} 
+		else {
+			var div = document.createElement('div');
+			i++;
+			div.setAttribute("id", "box_" + i);		
+			div.innerHTML = dynamicValue1 + ' - ' + dynamicValue2 + '<img id="working" src="logo.png" /><ul id="ulid" class="menu"><li id="over">Terminé</li><li id="delete">Supprimer</li></ul>' ;			
+			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
+		
+		
+		
+			$('#links').appendChild(div);
+			
+			
+			
+			div.onclick = dynamicEvent1;
+			$('div #ulid #delete').onclick = dynamicEvent2;
+
+				
+		}
+	return false;
+	}
+
+})();
+
+
+</script>
+	
+
+
+
+
+
+
+</body>
+</html>
+
+
+

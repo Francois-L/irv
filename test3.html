@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Le titre du document</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />
 	<script src="jquery-3.1.1.js"></script>
-	<script src="bootstrap.min.js"></script>
-	<script src="bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker.min.css">
-	<script src="bootstrap-datepicker.fr.min.js"></script>
+	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
+	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
 
 </head>
 
 <body>
-
-  
 
 <div class="container">
   <header class="page-header">
@@ -23,60 +21,15 @@
   
   </header>
 </div>
-  
-	
-<!-- Ajout d'un début de formulaire d'inscription ici -->	
-	
-	  <div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-					<form class="" method="post" action="database.php">
-						
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Mot de passe</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password"/>
-								</div>
-							</div>
-						</div>
-
-<!-- Je ne parviens pas à enregistrer cette div dans le fichier php ! -->
-						<div type="text" class="form-control" name="test" id="test">hehe</div>
-
-
-						<div class="form-group ">
-							<input type="submit" value="Valider" />
-						</div>
-						
-					</form>
-				</div>
-			</div>
-		</div>
-
-<!-- -->	
-	
-	
 
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
 			<form class="generate" method="post">
-				<input type="text" class="generate-input" placeholder="Objectif" maxlength="35">
+				<input type="text" class="generate-input" placeholder="Objectif" maxlength="35" />
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
-				<input type="submit" class="generate-submit" value="Créer l'objectif">
+				<input type="submit" id="submit" class="generate-submit" value="Créer l'objectif" />
 			</form>		
 		</div>
 	</div>
@@ -89,20 +42,9 @@
 	</div>
 	</section>
 </div>
-				
-				
-				
+
+
 <script>
-
-
-		function dynamicEvent1(links) {
-			alert('Hey, ya eu un clic sur ' + $(this).attr('id') + ' !')
-			
-		}
-		
-		function dynamicEvent2(links) {
-			alert('ho');
-		}
 
 $(function() {
     $("#datepicker").datepicker();
@@ -119,11 +61,11 @@ $(function() {
 	};
 	var links = $('#links').getElementsByTagName('div');
 	
-		var div = links[i];
+	var div = links[i];
 	for (var i = 0; i < links.length; i++) {
 	}
 	
-	$('.generate').onsubmit = function() {	
+	$('#submit').onclick = function() {	
 		var dynamicValue1 = $('.generate-input').value;
 		var dynamicValue2 = $('#datepicker').value;
 		
@@ -133,30 +75,75 @@ $(function() {
 		else {
 			var div = document.createElement('div');
 			i++;
-			div.setAttribute("id", "box_" + i);		
-			div.innerHTML = dynamicValue1 + ' - ' + dynamicValue2 + '<img id="working" src="logo.png" /><ul id="ulid-'+ i +'" class="menu"><li id="over-'+ i +'">Terminé</li><li class="delete" id="delete-'+ i +'">Supprimer</li></ul>' ;			
+			div.innerHTML = '<p id="dynamicValue1-1">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';	
+			div.setAttribute("id", "box_"+ i);		
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
-		
-		
-		
-			$('#links').appendChild(div);
-			
-			
-			
-			div.onclick = dynamicEvent1;
-			$('div #ulid #delete').onclick = dynamicEvent2;
 
-				
+			$('#links').appendChild(div);
+			$('#over-'+ i).onclick = dynamicEvent1;
+			$('#delete-'+ i).onclick = dynamicEvent2;
+
 		}
 	return false;
 	}
-
 })();
 
 
-</script>
-	
+function dynamicEvent1(links) {
+	alert('heu');
+}
 
+
+function dynamicEvent2(links) {	
+	var agree = confirm("Supprimer ?");
+	if (agree) {
+		$(this).parent().remove();
+	}
+	else {
+		return false;
+	}			
+}
+		
+</script>
+
+
+	<!-- C'est ici que ça plante !! Je voudrais passer mes données dynamicValue1-i et dynamicValue2-i en ajax vers le php
+	afin de les enregistrer dans la bdd 
+	Si je fais : 
+		var userID = document.getElementById("dynamicValue1-1").innerHTML;
+	alors l'alerte m'affiche bien le contenu de la dynamic value 1-1 :
+			alert(document.getElementById("dynamicValue1-1").innerHTML);
+	
+	Mais j'ai des problèmes avec l'increment, et j'ai l'impression qu'il faut passer par du for (var i=0; i < links.length; i++)
+	et je n'y parviens pas.
+	Si tu as un collègue génial qui passe. Et qui s'y connait en ajax au passage (le fichier php est à côté), je te donne de l'argent pour que tu lui offres une bière :)
+	Merci !
+	-->
+	
+<script>
+
+    $("#submit").click(function(e) {
+
+		var userID = document.getElementById("dynamicValue2-"+ i).innerHTML;
+			alert(document.getElementById("dynamicValue2-"+ i).innerHTML);
+		
+		e.preventDefault();
+		var var_data = "Hello World";
+		
+		$.ajax({
+			url: 'database.php',
+			type: 'POST',
+			dataType:'json',
+			data: { var_PHP_data: var_data },
+
+			success: function(response) {
+				//handle response
+				alert('ok');
+			}
+		})
+    })
+
+</script>
 
 
 

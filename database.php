@@ -1,7 +1,7 @@
 <?php
 try
 {
-		$bdd = new PDO('mysql:host=localhost;dbname=illdobdd', 'root', '');
+	$bdd = new PDO('mysql:host=localhost;dbname=illdobdd', 'root', '');
 }
 catch(Exception $e)
 {
@@ -10,19 +10,27 @@ catch(Exception $e)
 
 ?>
 <?php 
+session_start();
 
-$email=$_POST['email'];
-$password=$_POST['password'];
-$objectif=$_POST['test'];
+
+
+$bdd->exec("INSERT INTO illdo(objectif) VALUES('.$dynamicValue1-['i'].')");
+
 
 ?>
 
+Ton objectif est <?php echo htmlspecialchars($_POST['.$dynamicValue1-["i"].']); ?>
 
-Bonjour, <?php echo htmlspecialchars($_POST['email']); ?>.
-Ton mdp est <?php echo htmlspecialchars($_POST['password']); ?>.
-Ton 1er objectif est <?php echo htmlspecialchars($_POST['test']); ?>
-
-<?php $bdd->exec("INSERT INTO illdo(email, password, objectif) VALUES('$email', '$password', '$objectif')");
-
-echo 'Le jeu a bien ete ajoute !';
+ <?php
+     
+       echo $_GET['var_PHP_data'];
+    
 ?>
+
+ <?php                                                     
+   exit(0);
+   mysql_close();
+?>
+
+
+<!-- Ici ça va pas du tout, mais ça dépendra de ce que je peux faire avec l'ajax :) -->

@@ -26,8 +26,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<form class="generate" method="post">
-				<input type="text" class="generate-input" placeholder="Objectif" maxlength="35" />
+			<form class="generate" method="post" action="database.php" >
+				<input type="text" name="objectif" class="generate-input" placeholder="Objectif" maxlength="35" />
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
 				<input type="submit" id="submit" class="generate-submit" value="Créer l'objectif" />
 			</form>		
@@ -75,7 +75,7 @@ $(function() {
 		else {
 			var div = document.createElement('div');
 			i++;
-			div.innerHTML = '<p id="dynamicValue1-1">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';	
+			div.innerHTML = '<p id="dynamicValue1-' + i +'">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';	
 			div.setAttribute("id", "box_"+ i);		
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
 
@@ -83,14 +83,21 @@ $(function() {
 			$('#over-'+ i).onclick = dynamicEvent1;
 			$('#delete-'+ i).onclick = dynamicEvent2;
 
+
+
+
+		var send1 = document.getElementById("dynamicValue1-"+ i).innerHTML;
+		var send2 = document.getElementById("dynamicValue2-"+ i).innerHTML;
+			
 		}
 	return false;
 	}
+	
 })();
 
 
 function dynamicEvent1(links) {
-	alert('heu');
+	alert('terminé');
 }
 
 
@@ -103,51 +110,9 @@ function dynamicEvent2(links) {
 		return false;
 	}			
 }
-		
-</script>
 
-
-	<!-- C'est ici que ça plante !! Je voudrais passer mes données dynamicValue1-i et dynamicValue2-i en ajax vers le php
-	afin de les enregistrer dans la bdd 
-	Si je fais : 
-		var userID = document.getElementById("dynamicValue1-1").innerHTML;
-	alors l'alerte m'affiche bien le contenu de la dynamic value 1-1 :
-			alert(document.getElementById("dynamicValue1-1").innerHTML);
-	
-	Mais j'ai des problèmes avec l'increment, et j'ai l'impression qu'il faut passer par du for (var i=0; i < links.length; i++)
-	et je n'y parviens pas.
-	Si tu as un collègue génial qui passe. Et qui s'y connait en ajax au passage (le fichier php est à côté), je te donne de l'argent pour que tu lui offres une bière :)
-	Merci !
-	-->
-	
-<script>
-
-    $("#submit").click(function(e) {
-
-		var userID = document.getElementById("dynamicValue2-"+ i).innerHTML;
-			alert(document.getElementById("dynamicValue2-"+ i).innerHTML);
-		
-		e.preventDefault();
-		var var_data = "Hello World";
-		
-		$.ajax({
-			url: 'database.php',
-			type: 'POST',
-			dataType:'json',
-			data: { var_PHP_data: var_data },
-
-			success: function(response) {
-				//handle response
-				alert('ok');
-			}
-		})
-    })
 
 </script>
-
-
-
-
 
 </body>
 </html>

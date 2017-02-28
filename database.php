@@ -14,23 +14,17 @@ session_start();
 
 
 
-$bdd->exec("INSERT INTO illdo(objectif) VALUES('.$dynamicValue1-['i'].')");
+$send1 = !empty($_POST['send1']) ? $_POST['send1'] : NULL;
+$send2 = !empty($_POST['send2']) ? $_POST['send2'] : NULL;
+ 
+//Ton traitement de tri
 
+$req = $bdd->prepare("INSERT INTO illdo(objectif) VALUES('$send1')");
+$req ->execute(array($_POST['send1']));
 
-?>
-
-Ton objectif est <?php echo htmlspecialchars($_POST['.$dynamicValue1-["i"].']); ?>
-
- <?php
-     
-       echo $_GET['var_PHP_data'];
-    
 ?>
 
  <?php                                                     
    exit(0);
    mysql_close();
 ?>
-
-
-<!-- Ici ça va pas du tout, mais ça dépendra de ce que je peux faire avec l'ajax :) -->

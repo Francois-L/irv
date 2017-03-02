@@ -19,9 +19,9 @@ $send2 = !empty($_POST['send2']) ? $_POST['send2'] : NULL;
  
 //Ton traitement de tri
 
-$req = $bdd->prepare("INSERT INTO illdo(objectif) VALUES('$send1')");
+$req = $bdd->prepare("INSERT INTO illdo(objectif, date) VALUES('$send1', '$send2')");
 $req ->execute(array($_POST['send1']));
-
+$req ->execute(array($_POST['send2']));
 ?>
 
  <?php                                                     

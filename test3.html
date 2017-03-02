@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Le titre du document</title>
+  <meta charset="UTF-8" />
+  <title>Le titre du document</title>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />
 	<script src="jquery-3.1.1.js"></script>
 	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
 	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
-
 </head>
 
 <body>
 
-<div class="container">
-  <header class="page-header">
-	<h1>Illdo</h1>
-	<h2>Réaliser.</h2>
-  
-  </header>
-</div>
+  <div class="container">
+    <header class="page-header">
+  	  <h1>Illdo</h1>
+  	  <h2>Réaliser.</h2>
+    </header>
+  </div>
 
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<form class="generate" method="post" action="database.php" >
+			<form id="form1" class="generate" method="post" action="database.php">
 				<input type="text" name="objectif" class="generate-input" placeholder="Objectif" maxlength="35" />
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
-				<input type="submit" id="submit" class="generate-submit" value="Créer l'objectif" />
-			</form>		
+				<input type="hidden" name="send1" id="send1" />
+				<input type="hidden" name="send2" id="send2" />
+				<input type="button" id="submitButton" class="generate-submit" value="Créer l'objectif" />
+			</form>
 		</div>
 	</div>
 </div>
@@ -38,10 +38,10 @@
 <div class="container">
 	<section class="row">
     <div id="links">
-
-	</div>
+	  </div>
 	</section>
 </div>
+
 
 
 <script>
@@ -55,44 +55,53 @@ $(function() {
 
 
 (function(){
-	
+
 	var $ = function (selector) {
 		return document.querySelector(selector);
 	};
 	var links = $('#links').getElementsByTagName('div');
-	
+
 	var div = links[i];
 	for (var i = 0; i < links.length; i++) {
 	}
-	
-	$('#submit').onclick = function() {	
+
+	$('#submitButton').onclick = function() {
 		var dynamicValue1 = $('.generate-input').value;
 		var dynamicValue2 = $('#datepicker').value;
 		
+		
+		
+
 		if(!dynamicValue1 || !dynamicValue2) {
 			alert('Veuillez remplir les 2 champs');
-		} 
+		}
 		else {
 			var div = document.createElement('div');
 			i++;
-			div.innerHTML = '<p id="dynamicValue1-' + i +'">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';	
-			div.setAttribute("id", "box_"+ i);		
+			div.innerHTML = '<p id="dynamicValue1-' + i +'">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';
+			div.setAttribute("id", "box_"+ i);
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
-
 			$('#links').appendChild(div);
+
+			var send1 = document.getElementById("dynamicValue1-"+ i).innerHTML;
+			var send2 = document.getElementById("dynamicValue2-"+ i).innerHTML;
+			
+			var send2 = send2.split('/');
+			var send2 = (send2[2] + ' - ' + send2[1] + ' - ' + send2[0]); 
+			
+			
+			
+			document.getElementById('send1').value = send1;
+			document.getElementById('send2').value = send2;
+
 			$('#over-'+ i).onclick = dynamicEvent1;
 			$('#delete-'+ i).onclick = dynamicEvent2;
 
 
-
-
-		var send1 = document.getElementById("dynamicValue1-"+ i).innerHTML;
-		var send2 = document.getElementById("dynamicValue2-"+ i).innerHTML;
-			
+		document.getElementById('form1').submit();
 		}
-	return false;
 	}
-	
+
 })();
 
 
@@ -101,14 +110,14 @@ function dynamicEvent1(links) {
 }
 
 
-function dynamicEvent2(links) {	
+function dynamicEvent2(links) {
 	var agree = confirm("Supprimer ?");
 	if (agree) {
 		$(this).parent().remove();
 	}
 	else {
 		return false;
-	}			
+	}
 }
 
 
@@ -116,6 +125,3 @@ function dynamicEvent2(links) {
 
 </body>
 </html>
-
-
-

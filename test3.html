@@ -87,7 +87,7 @@ $(function() {
 			var send2 = document.getElementById("dynamicValue2-"+ i).innerHTML;
 			
 			var send2 = send2.split('/');
-			var send2 = (send2[2] + ' - ' + send2[1] + ' - ' + send2[0]); 
+			var send2 = (send2[2] + '-' + send2[1] + '-' + send2[0]); 
 			
 			
 			
@@ -98,7 +98,19 @@ $(function() {
 			$('#delete-'+ i).onclick = dynamicEvent2;
 
 
-		document.getElementById('form1').submit();
+
+		
+				jQuery.post("database.php",
+				{
+				  send1: send1,
+				  send2: send2
+				},
+				function(response, status) {
+				  console.log("ça marche !", response);
+				}
+			  );
+				
+		
 		}
 	}
 
@@ -114,6 +126,7 @@ function dynamicEvent2(links) {
 	var agree = confirm("Supprimer ?");
 	if (agree) {
 		$(this).parent().remove();
+		
 	}
 	else {
 		return false;

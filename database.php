@@ -15,13 +15,18 @@ session_start();
 
 $request = $bdd->query('SELECT objectif, date FROM illdo');
 
-$donnees = $request->fetch();
+while ($donnees = $request->fetch())
+{
+	echo ' Objectif : ' . $donnees['objectif'] . ' - Date de fin : ' . $donnees['date'] . '<br />';
+}
 
-echo ' Objectif : ' . $donnees['objectif'] . ' - Date de fin : ' . $donnees['date'];
-$reponse->closeCursor();
+
 
 ?>
-
+ <?php                                                     
+   exit(0);
+   mysql_close();
+?>
 
 
 <?php 

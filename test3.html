@@ -41,24 +41,16 @@
 	<section class="row">
     <div id="links">
 	  </div>
+	  <div id="links2">
+	  </div>
 	</section>
 </div>
 
 
 
-<script>
-
-	$(document).ready(function() {
-		$("#links").load("database.php #request")
-	});
-
-
-</script>
-
-
-
 
 <script>
+
 
 $(function() {
     $("#datepicker").datepicker();
@@ -136,6 +128,7 @@ function dynamicEvent1(links) {
 }
 
 
+
 function dynamicEvent2(links) {
 	var agree = confirm("Supprimer ?");
 	if (agree) {
@@ -148,7 +141,15 @@ function dynamicEvent2(links) {
 }
 
 
+
+
+	$(document).ready(function() {
+		$("#links2").load("load-objectifs.php")
+	});
+	
+	
 </script>
+
 
 </body>
 </html>

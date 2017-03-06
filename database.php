@@ -22,4 +22,14 @@ if(!empty($_POST['send1']) and !empty($_POST['send2'])) {
 	$req ->execute(array ($_POST['send1'], $_POST['send2']));
 }
 
+
+ // Suppression
+$ID = $_GET['ID'];
+$ID = !empty($_POST['ID']) ? $_POST['ID'] : NULL;
+$request = $bdd->query("DELETE FROM illdo WHERE ID = ".$ID );
+
+
+
+ 
+
 exit(0);

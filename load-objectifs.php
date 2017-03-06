@@ -10,7 +10,7 @@ catch(Exception $e)
 
 session_start();
 
-$request = $bdd->query('SELECT objectif, date, ID FROM illdo');
+$request = $bdd->query('SELECT objectif, date, ID FROM illdo ORDER BY ID DESC');
 
 while ($donnees = $request->fetch()) 
 {

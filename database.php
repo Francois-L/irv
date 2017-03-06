@@ -10,21 +10,9 @@ catch(Exception $e)
 
 
 session_start();
-?>
 
-<div id="request">
-<?php 
-$request = $bdd->query('SELECT objectif, date FROM illdo');
 
-while ($donnees = $request->fetch()) 
-{
-	echo ' Objectif : ' . $donnees['objectif'] . ' - Date de fin : ' . $donnees['date'] . '<br />';
-}
-?>
 
-</div>
-
-<?php
 $send1 = !empty($_POST['send1']) ? $_POST['send1'] : NULL;
 $send2 = !empty($_POST['send2']) ? $_POST['send2'] : NULL;
 

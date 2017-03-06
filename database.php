@@ -10,15 +10,21 @@ catch(Exception $e)
 
 
 session_start();
+?>
 
+<div id="request">
+<?php 
 $request = $bdd->query('SELECT objectif, date FROM illdo');
 
-while ($donnees = $request->fetch())
+while ($donnees = $request->fetch()) 
 {
 	echo ' Objectif : ' . $donnees['objectif'] . ' - Date de fin : ' . $donnees['date'] . '<br />';
 }
+?>
 
+</div>
 
+<?php
 $send1 = !empty($_POST['send1']) ? $_POST['send1'] : NULL;
 $send2 = !empty($_POST['send2']) ? $_POST['send2'] : NULL;
 
@@ -27,7 +33,5 @@ $send2 = !empty($_POST['send2']) ? $_POST['send2'] : NULL;
 $req = $bdd->prepare("INSERT INTO illdo(objectif, date) VALUES('$send1', '$send2')");
 $req ->execute(array($_POST['send1'], $_POST['send2']));
 
-var_dump($_POST);
 
-
-   exit(0);
+exit(0);

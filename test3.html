@@ -104,8 +104,6 @@ $(function() {
 			$('#delete-'+ i).onclick = dynamicEvent2;
 
 
-
-		
 				jQuery.post("database.php",
 				{
 				  send1: send1,
@@ -133,7 +131,6 @@ function dynamicEvent2(links) {
 	var agree = confirm("Supprimer ?");
 	if (agree) {
 		$(this).parent().remove();
-		
 	}
 	else {
 		return false;
@@ -141,13 +138,15 @@ function dynamicEvent2(links) {
 }
 
 
+$(document).ready(function() {
+	$("#links2").load("load-objectifs.php")
+});
 
 
-	$(document).ready(function() {
-		$("#links2").load("load-objectifs.php")
-	});
-	
-	
+
+
+
+
 </script>
 
 

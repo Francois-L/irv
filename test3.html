@@ -9,12 +9,17 @@
 	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
 	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
-	
+
 	
 </head>
 
 <body>
-
+<script>
+(function() {
+				  jQuery("li[id^='delete-']").click(dynamicEvent2);
+				  console.log('hey');
+})();
+</script>
   <div class="container">
     <header class="page-header">
   	  <h1>Illdo</h1>
@@ -104,17 +109,16 @@ $(function() {
 			$('#delete-'+ i).onclick = dynamicEvent2;
 
 
-				jQuery.post("database.php",
+			jQuery.post("database.php",
 				{
 				  send1: send1,
 				  send2: send2
 				},
 				function(response, status) {
 				  console.log("ça marche !", response);
+
 				}
 			  );
-				
-		
 		}
 	}
 
@@ -128,9 +132,18 @@ function dynamicEvent1(links) {
 
 
 function dynamicEvent2(links) {
-	var agree = confirm("Supprimer ?");
+	var id = jQuery(this).data('id-objectif');
+	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
 		$(this).parent().remove();
+			   
+		$.ajax({
+			type: "POST",
+			url: "remove-objects.php",
+			data: 'id='+ id,
+		});
+		
+		
 	}
 	else {
 		return false;

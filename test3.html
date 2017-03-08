@@ -14,12 +14,7 @@
 </head>
 
 <body>
-<script>
-(function() {
-				  jQuery("li[id^='delete-']").click(dynamicEvent2);
-				  console.log('hey');
-})();
-</script>
+
   <div class="container">
     <header class="page-header">
   	  <h1>Illdo</h1>
@@ -116,7 +111,6 @@ $(function() {
 				},
 				function(response, status) {
 				  console.log("ça marche !", response);
-
 				}
 			  );
 		}
@@ -152,13 +146,12 @@ function dynamicEvent2(links) {
 
 
 $(document).ready(function() {
-	$("#links2").load("load-objectifs.php")
+	$("#links2").load("load-objectifs.php", function() {
+          console.log("Les objectifs sont chargés");
+          console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
+          jQuery("li[id^='delete-']").click(dynamicEvent2);
+        });
 });
-
-
-
-
-
 
 </script>
 

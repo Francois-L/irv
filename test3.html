@@ -26,11 +26,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<form id="form1" class="generate" method="post" action="database.php">
+			<form id="form1" class="generate" method="post" action="save-objectifs.php">
 				<input type="text" name="objectif" class="generate-input" placeholder="Objectif" maxlength="35" />
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
-				<input type="hidden" name="send1" id="send1" />
-				<input type="hidden" name="send2" id="send2" />
+				<input type="hidden" name="sendObjectif" id="sendObjectif" />
+				<input type="hidden" name="sendDate" id="sendDate" />
 				<input type="button" id="submitButton" class="generate-submit" value="Créer l'objectif" />
 			</form>
 		</div>
@@ -89,25 +89,25 @@ $(function() {
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
 			$('#links').appendChild(div);
 
-			var send1 = document.getElementById("dynamicValue1-"+ i).innerHTML;
-			var send2 = document.getElementById("dynamicValue2-"+ i).innerHTML;
+			var sendObjectif = document.getElementById("dynamicValue1-"+ i).innerHTML;
+			var sendDate = document.getElementById("dynamicValue2-"+ i).innerHTML;
 			
-			var send2 = send2.split('/');
-			var send2 = (send2[2] + '-' + send2[1] + '-' + send2[0]); 
+			var sendDate = sendDate.split('/');
+			var sendDate = (sendDate[2] + '-' + sendDate[1] + '-' + sendDate[0]); 
 			
 			
 			
-			document.getElementById('send1').value = send1;
-			document.getElementById('send2').value = send2;
+			document.getElementById('sendObjectif').value = sendObjectif;
+			document.getElementById('sendDate').value = sendDate;
 
-			$('#over-'+ i).onclick = dynamicEvent1;
-			$('#delete-'+ i).onclick = dynamicEvent2;
+			$('#over-'+ i).onclick = terminerObjectif;
+			$('#delete-'+ i).onclick = deleteObjectif;
 
 
-			jQuery.post("database.php",
+			jQuery.post("save-objectifs.php",
 				{
-				  send1: send1,
-				  send2: send2
+				  sendObjectif: sendObjectif,
+				  sendDate: sendDate
 				},
 				function(response, status) {
 				  console.log("ça marche !", response);
@@ -119,13 +119,13 @@ $(function() {
 })();
 
 
-function dynamicEvent1(links) {
+function terminerObjectif(links) {
 	alert('terminé');
 }
 
 
 
-function dynamicEvent2(links) {
+function deleteObjectif(links) {
 	var id = jQuery(this).data('id-objectif');
 	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
@@ -133,7 +133,7 @@ function dynamicEvent2(links) {
 			   
 		$.ajax({
 			type: "POST",
-			url: "remove-objects.php",
+			url: "remove-objectifs.php",
 			data: 'id='+ id,
 		});
 		
@@ -147,9 +147,9 @@ function dynamicEvent2(links) {
 
 $(document).ready(function() {
 	$("#links2").load("load-objectifs.php", function() {
-          console.log("Les objectifs sont chargés");
-          console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
-          jQuery("li[id^='delete-']").click(dynamicEvent2);
+         // console.log("Les objectifs sont chargés");
+         // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
+          jQuery("li[id^='delete-']").click(deleteObjectif);
         });
 });
 

@@ -130,14 +130,15 @@ function deleteObjectif(links) {
 	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
 		$(this).parent().remove();
-			   
-		$.ajax({
-			type: "POST",
-			url: "remove-objectifs.php",
-			data: 'id='+ id,
+		console.log(id);
+		jQuery.post("remove-objectifs.php",
+		{
+			data: 'id='+ id
+		},
+		function(response, status) {
+			console.log("ça marche !", response);
 		});
-		
-		
+		console.log(id);
 	}
 	else {
 		return false;

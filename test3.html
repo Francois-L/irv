@@ -59,7 +59,6 @@ $(function() {
     });
 });
 
-
 (function(){
 
 	var $ = function (selector) {
@@ -75,34 +74,28 @@ $(function() {
 		var dynamicValue1 = $('.generate-input').value;
 		var dynamicValue2 = $('#datepicker').value;
 		
-		
-		
-
 		if(!dynamicValue1 || !dynamicValue2) {
 			alert('Veuillez remplir les 2 champs');
 		}
 		else {
 			var div = document.createElement('div');
 			i++;
-			div.innerHTML = '<p id="dynamicValue1-' + i +'">' + dynamicValue1 + '</p><p id="dynamicValue2-'+ i +'">' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';
+			div.innerHTML = '<p>' + dynamicValue1 + '<br />' + dynamicValue2 + '</p><li id="over-'+ i +'">Terminé</li><li id="delete-'+ i +'">Supprimer</li><img id="working'+ i +'" src="logo.png" />';
 			div.setAttribute("id", "box_"+ i);
 			div.className = 'col-xs-6 col-sm-4 col-md-3 col-lg-3';
 			$('#links').appendChild(div);
 
-			var sendObjectif = document.getElementById("dynamicValue1-"+ i).innerHTML;
-			var sendDate = document.getElementById("dynamicValue2-"+ i).innerHTML;
+			var sendObjectif = dynamicValue1;
+			var sendDate = dynamicValue2;
 			
 			var sendDate = sendDate.split('/');
 			var sendDate = (sendDate[2] + '-' + sendDate[1] + '-' + sendDate[0]); 
 			
-			
-			
 			document.getElementById('sendObjectif').value = sendObjectif;
 			document.getElementById('sendDate').value = sendDate;
 
-			$('#over-'+ i).onclick = terminerObjectif;
+			$('#over-'+ i).onclick = overObjectif;
 			$('#delete-'+ i).onclick = deleteObjectif;
-
 
 			jQuery.post("save-objectifs.php",
 				{
@@ -112,17 +105,24 @@ $(function() {
 				function(response, status) {
 				  console.log("ça marche !", response);
 				}
-			  );
+			);			
+
 		}
 	}
-
 })();
 
-
-function terminerObjectif(links) {
-	alert('terminé');
+function overObjectif(links) {
+	var id = jQuery(this).data('id-over');
+	
+	var agree = confirm("L'objectif "+ id +" est terminé ?");
+	if (agree) {
+	alert('ok');
+	
+	}
+	else {
+		return false;
+	}
 }
-
 
 
 function deleteObjectif(links) {
@@ -130,7 +130,6 @@ function deleteObjectif(links) {
 	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
 		$(this).parent().remove();
-		console.log(id);
 		jQuery.ajax({
 			type: "POST",
 			url: "remove-objectifs.php",
@@ -140,7 +139,6 @@ function deleteObjectif(links) {
 				console.log("ça marche ! " + id, response);
 			}
 		});
-		console.log(id);
 	}
 	else {
 		return false;
@@ -153,6 +151,7 @@ $(document).ready(function() {
          // console.log("Les objectifs sont chargés");
          // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
           jQuery("li[id^='delete-']").click(deleteObjectif);
+		  jQuery("li[id^='over-']").click(overObjectif);
         });
 });
 

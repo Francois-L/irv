@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <title>Le titre du document</title>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
 	<script src="jquery-3.1.1.js"></script>
 	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
 	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
 
 	
@@ -111,21 +111,31 @@ $(function() {
 	}
 })();
 
-function overObjectif(links) {
-	var id = jQuery(this).data('id-over');
+function toggleMenu() {
+	var menuBox = document.getElementById('menu-box');  
+	alert(menuBox);
 	
-	var agree = confirm("L'objectif "+ id +" est terminé ?");
+	if (menuBox.style.display == "block") {
+		menuBox.style.display = "none";
+	}
+	else {
+		menuBox.style.display = "block";
+	}
+}
+
+
+function overObjectif() {
+	var over = jQuery(this).data('id-over');
+	var agree = confirm("L'objectif "+ over +" est terminé ?");
 	if (agree) {
-	alert('ok');
-	
+		alert('ok');
 	}
 	else {
 		return false;
 	}
 }
 
-
-function deleteObjectif(links) {
+function deleteObjectif() {
 	var id = jQuery(this).data('id-objectif');
 	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
@@ -146,12 +156,18 @@ function deleteObjectif(links) {
 }
 
 
+
+
+
+
 $(document).ready(function() {
 	$("#links2").load("load-objectifs.php", function() {
          // console.log("Les objectifs sont chargés");
          // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
-          jQuery("li[id^='delete-']").click(deleteObjectif);
+		  jQuery("ul[id^='menubox-']").click(toggleMenu);
+ 		  jQuery("li[id^='delete-']").click(deleteObjectif);
 		  jQuery("li[id^='over-']").click(overObjectif);
+
         });
 });
 

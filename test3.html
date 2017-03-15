@@ -112,8 +112,8 @@ $(function() {
 })();
 
 function toggleMenu() {
-	var menuBox = document.getElementById('menu-box');  
-	alert(menuBox);
+	var menuBox = jQuery(this).data('id-objectifdate');
+	alert("la box " + menuBox + " est là");
 	
 	if (menuBox.style.display == "block") {
 		menuBox.style.display = "none";
@@ -146,7 +146,7 @@ function deleteObjectif() {
 			data: "id=" + id,
 			cache: false,
 			success: function(response, status) {
-				console.log("ça marche ! " + id, response);
+				console.log("supprimé ! " + id, response);
 			}
 		});
 	}
@@ -155,8 +155,24 @@ function deleteObjectif() {
 	}
 }
 
-
-
+/*
+		$('#uploadimage-854').on('submit',function(e) {
+			e.preventDefault();
+			console.log('ok');
+			$.ajax({
+				url: "save-pictures.php", // Url to which the request is send
+				type: "POST",             // Type of request to be send, called as method
+				data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+				contentType: false,       // The content type used when sending data to the server.
+				cache: false,             // To unable request pages to be cached
+				processData:false,        // To send DOMDocument or non processed data file it is set to false
+				success: function(data)   // A function to be called if request succeeds
+				{
+					console.log("envoyé" + id, response);
+				}
+			});
+		});
+*/
 
 
 
@@ -164,10 +180,9 @@ $(document).ready(function() {
 	$("#links2").load("load-objectifs.php", function() {
          // console.log("Les objectifs sont chargés");
          // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
-		  jQuery("ul[id^='menubox-']").click(toggleMenu);
+		  jQuery("p[id^='objectifdate-']").click(toggleMenu);
  		  jQuery("li[id^='delete-']").click(deleteObjectif);
 		  jQuery("li[id^='over-']").click(overObjectif);
-
         });
 });
 

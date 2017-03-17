@@ -8,12 +8,12 @@ catch(Exception $e)
 	die('Erreur : ' . $e->getMessage());
 }		
 
-$request = $bdd->query('SELECT objectif, date, ID FROM illdo ORDER BY ID DESC');
+$request = $bdd->query('SELECT objectif, DATE_FORMAT(date, "%d-%m-%Y") AS datetri, ID FROM illdo ORDER BY date DESC');
 
 while ($donnees = $request->fetch()) 
 {
 	echo '<div id="box_' . $donnees['ID'] . '" class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-	<p id="objectifdate-' . $donnees['ID'] .'" data-id-objectifdate="'. $donnees['ID'] .'">' . $donnees['objectif'] . '<br />' . $donnees['date'] . '</p>
+	<p id="objectifdate-' . $donnees['ID'] .'" data-id-objectifdate="'. $donnees['ID'] .'">' . $donnees['objectif'] . '<br />' . $donnees['datetri'] . '</p>
 	<ul id="menubox-'. $donnees['ID'] .'" data-id-menubox="'. $donnees['ID'] .'" style="display: block;">
 	<li id="over-'. $donnees['ID'] .'" data-id-over="'. $donnees['ID'] .'">Terminé</li>
 	<form id="uploadimage-'. $donnees['ID'] .'" action="" method="post" enctype="multipart/form-data">

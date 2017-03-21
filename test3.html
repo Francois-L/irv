@@ -101,8 +101,9 @@ $(function() {
 					console.log('response', response);
 					console.log('status', status);
 					var id = response.id;
-					newDiv.innerHTML = '<p>' + dynamicValue1 + '<br />' + dynamicValue2 + '</p><li data-id-over="'+ id +'">Terminé</li><li data-id-delete="'+ id +'">Supprimer</li><img id="working'+ id +'" src="logo.png" />';
+					newDiv.innerHTML = '<p data-id-objectifdate="'+ id +'">' + dynamicValue1 + '<br />' + dynamicValue2 + '</p><ul style="display:none"><li data-id-over="'+ id +'">Terminé</li><li data-id-delete="'+ id +'">Supprimer</li></ul><img id="working'+ id +'" src="logo.png" />';
 					newDiv.setAttribute("id", "box_"+ id);
+					jQuery('p[data-id-objectifdate='+id+']').click(toggleMenu);
 					jQuery('li[data-id-over='+id+']').click(overObjectif);
 					jQuery('li[data-id-delete='+id+']').click(deleteObjectif);
 				  console.log("ça marche !", response);

@@ -115,21 +115,10 @@ $(function() {
 })();
 
 function toggleMenu() {
-	console.log("toggleMenu", jQuery(this));
-	jQuery(this).css('background','red');
-	console.log("toggleMenu", jQuery(this).data('id-objectifdate'));
-	return;
-	var menuBox = jQuery(this).data('id-objectifdate');
-	alert("la box " + menuBox + " est là");
-	
-	if (menuBox.style.display == "block") {
-		menuBox.style.display = "none";
-	}
-	else {
-		menuBox.style.display = "block";
-	}
+    var menuBox = jQuery(this).parent().find('ul');
+    if (menuBox.is(':visible')) { menuBox.slideUp(); }
+    else { menuBox.slideDown() };
 }
-
 
 function overObjectif() {
 	console.log('[start] overObjectif', jQuery(this));

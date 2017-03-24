@@ -10,7 +10,6 @@
 	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css" />
-
 	
 </head>
 
@@ -156,20 +155,18 @@ function deleteObjectif() {
 }
 
 
-
-
 $(function () {
-    $('#my_form').on('submit', function (e) {
+    $("#uploadimage-920").on('submit', function (e) {
         // On empêche le navigateur de soumettre le formulaire
         e.preventDefault();
- 
+
         var $form = $(this);
         var formdata = (window.FormData) ? new FormData($form[0]) : null;
         var data = (formdata !== null) ? formdata : $form.serialize();
- 
+
         $.ajax({
-            url: $form.attr('action'),
-            type: $form.attr('method'),
+            url: "save-pictures.php",
+            type: "POST",
             contentType: false, // obligatoire pour de l'upload
             processData: false, // obligatoire pour de l'upload
             dataType: 'json', // selon le retour attendu
@@ -181,32 +178,6 @@ $(function () {
     });
 });
 
-
-
-
-
-
-
-/*	$(document).ready(function (e){
-		$("div[id^='uploadimage-']").on('submit',function(e) {
-			e.preventDefault();
-			console.log('ok');
-			jQuery.post({
-				url: "save-pictures.php", // Url to which the request is send
-				type: "POST",             // Type of request to be send, called as method
-				data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-				contentType: false,       // The content type used when sending data to the server.
-				cache: false,             // To unable request pages to be cached
-				processData:false,        // To send DOMDocument or non processed data file it is set to false
-				success: function(data)   // A function to be called if request succeeds
-				{
-					$('#msg').html(data);
-					console.log("envoyé" + id, response);
-				}
-			});
-		});
-	});
-*/
 
 $(document).ready(function() {
 	$("#links2").load("load-objectifs.php", function() {

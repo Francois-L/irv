@@ -11,15 +11,18 @@ catch(Exception $e)
 
  //Ton traitement de tri
 
+ $file = !empty($_POST["data"]) ? $_POST['data'] : NULL;
  
-    $data['file'] = $_FILES;
-	$uploads_dir = 'uploads';
-	move_uploaded_file($data, '$uploads_dir/$data');
+ 
+ if (isset($_POST["file"])) {
+    // do php stuff
+	$query = "INSERT INTO illdo(image) VALUES('$file')";
 	
-    echo json_encode($data);
+    // call `json_encode` on `file` object
+    $file = json_encode($_POST["file"]);
+    // return `file` as `json` string
+    echo $file;
+};
+ 
 
-
-	
-		
-	
 exit(0);

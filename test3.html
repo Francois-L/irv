@@ -52,20 +52,12 @@
 <script>
 
 
-$(function() {
-    $("#datepicker").datepicker({language:'fr'});
-    $("#datepicker").on("change",function(){
-        var selected = $(this).val();
-    });
-});
-
-(function(){
-
+function initNewTargetForm() {
+	console.debug('initNewTargetForm', 'start');
 	var $ = function (selector) {
 		return document.querySelector(selector);
 	};
 	var links = $('#links').getElementsByTagName('div');
-
 	var div = links[i];
 	for (var i = 0; i < links.length; i++) {
 	}
@@ -91,7 +83,6 @@ $(function() {
 			
 			document.getElementById('sendObjectif').value = sendObjectif;
 			document.getElementById('sendDate').value = sendDate;
-
 			jQuery.post("save-objectifs.php",
 				{
 				  sendObjectif: sendObjectif,
@@ -106,23 +97,56 @@ $(function() {
 					jQuery('p[data-id-objectifdate='+id+']').click(toggleMenu);
 					jQuery('li[data-id-over='+id+']').click(overObjectif);
 					jQuery('li[data-id-delete='+id+']').click(deleteObjectif);
-				  console.log("ça marche !", response);
+					initImageForms();
+				  	console.log("ça marche !", response);
+					
 				}, 
 				'json'
 			);
 			location.reload();
 		}
 	}
-})();
+}
 
+function initImageForms() {
+	console.debug('initImageForms', 'start');
+    $("form[id^='uploadimage-']").on('submit', function (e) {
+        // On empêche le navigateur de soumettre le formulaire
+        e.preventDefault();
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: "save-pictures.php",
+            type: "POST",
+            data: formData,
+			contentType: false,
+			processData: false,
+            success: function (response) {
+                // La réponse du serveur
+				console.log(response);
+            }
+        });
+		location.reload();
+    });
+	console.debug('initImageForms', 'end');
+	
+};
+
+function initDatePickers() {
+	console.debug('initDatePickers', 'start');
+    $("#datepicker").datepicker({language:'fr'});
+    $("#datepicker").on("change",function(){
+        var selected = $(this).val();
+    });
+	console.debug('initDatePickers', 'end');
+}
 function toggleMenu() {
+	console.debug('toggleMenu', 'start');
     var menuBox = jQuery(this).parent().find('ul');
     if (menuBox.is(':visible')) { menuBox.slideUp(); }
     else { menuBox.slideDown() };
 }
-
-function overObjectif() {
-	console.log('[start] overObjectif', jQuery(this));
+function endTarget() {
+	console.debug('endTarget', 'start');
 	var id = jQuery(this).data('id-over');
 	var agree = confirm("L'objectif "+ id +" est terminé ?");
 	if (agree) {
@@ -132,9 +156,8 @@ function overObjectif() {
 		return false;
 	}
 }
-
-function deleteObjectif() {
-	console.log('[start] deleteObjectif', jQuery(this));
+function deleteTarget() {
+	console.debug('deleteTarget', 'start');
 	var id = jQuery(this).data('id-delete');
 	var agree = confirm("Supprimer cet objectif "+ id +" ?");
 	if (agree) {
@@ -154,40 +177,26 @@ function deleteObjectif() {
 	}
 }
 
-
-$(function () {
-    $("#uploadimage-920").on('submit', function (e) {
-        // On empêche le navigateur de soumettre le formulaire
-        e.preventDefault();
-
-        var $form = $(this);
-        var formdata = (window.FormData) ? new FormData($form[0]) : null;
-        var data = (formdata !== null) ? formdata : $form.serialize();
-
-        $.ajax({
-            url: "save-pictures.php",
-            type: "POST",
-            contentType: false, // obligatoire pour de l'upload
-            processData: false, // obligatoire pour de l'upload
-            dataType: 'json', // selon le retour attendu
-            data: data,
-            success: function (response) {
-                // La réponse du serveur
-            }
-        });
-    });
-});
-
+function loadTargets() {
+	console.debug('loadTargets', 'start');
+	$("#links2").load("load-objectifs.php", function() {
+          // console.log("Les objectifs sont chargés");
+          // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
+		  jQuery("p[id^='objectifdate-']").click(toggleMenu);
+ 		  jQuery("li[id^='delete-']").click(deleteTarget);
+		  jQuery("li[id^='over-']").click(endTarget);
+		  initImageForms();
+	      console.debug('loadTargets', 'end');
+	});
+}
 
 $(document).ready(function() {
-	$("#links2").load("load-objectifs.php", function() {
-         // console.log("Les objectifs sont chargés");
-         // console.log("on met à jour les <li> suivants :", jQuery("li[id^='delete-']"));
-		  jQuery("p[id^='objectifdate-']").click(toggleMenu);
- 		  jQuery("li[id^='delete-']").click(deleteObjectif);
-		  jQuery("li[id^='over-']").click(overObjectif);
-        });
+	initDatePickers();
+	initNewTargetForm();
+	loadTargets();
 });
+</script>
+
 
 </script>
 

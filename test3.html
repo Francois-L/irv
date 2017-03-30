@@ -9,19 +9,19 @@
 	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
+	<script src="dropzone.js"></script>
+	<link href="dropzone.css" type="text/css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	
 </head>
 
 <body>
-
   <div class="container">
     <header class="page-header">
-  	  <h1>Illdo</h1>
+  	  <h1>illdo</h1>
   	  <h2>Réaliser.</h2>
     </header>
   </div>
-
 
 <div class="container">
 	<div class="row">
@@ -159,7 +159,7 @@ function endTarget() {
 function deleteTarget() {
 	console.debug('deleteTarget', 'start');
 	var id = jQuery(this).data('id-delete');
-	var agree = confirm("Supprimer cet objectif "+ id +" ?");
+	var agree = confirm("Supprimer cet objectif ?");
 	if (agree) {
 		$(this).parent().parent().remove();
 		jQuery.ajax({

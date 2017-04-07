@@ -23,6 +23,9 @@
     </header>
   </div>
 
+		<form action="uploads"
+		class="dropzone"></form>
+	  
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -31,7 +34,7 @@
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
 				<input type="hidden" name="sendObjectif" id="sendObjectif" />
 				<input type="hidden" name="sendDate" id="sendDate" />
-				<input type="button" id="submitButton" class="generate-submit" value="Créer l'objectif" />
+				<input type="button" id="submitButton" class="generate-submit" value="I'll do" />
 			</form>
 		</div>
 	</div>
@@ -186,6 +189,11 @@ function loadTargets() {
  		  jQuery("li[id^='delete-']").click(deleteTarget);
 		  jQuery("li[id^='over-']").click(endTarget);
 		  initImageForms();
+				  jQuery.getScript("dropzone.js", function( data, textStatus, jqxhr ) {
+					  console.log( textStatus ); // Success
+					  console.log( jqxhr.status ); // 200
+					  console.log( "Load was performed." );
+				});
 	      console.debug('loadTargets', 'end');
 	});
 }
@@ -197,8 +205,6 @@ $(document).ready(function() {
 });
 </script>
 
-
-</script>
 
 
 </body>

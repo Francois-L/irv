@@ -1,25 +1,20 @@
 .menu-objectif{
-	max-width:90%;
-	position:absolute;
-	top:4.5em;
+	position:relative; 
 	list-style:none;
 	margin-left:0;
 	padding-left:0;
 	background-color:rgba(255,255,255,0.7);
+	padding-top:7px;
+	padding-bottom:27px;
 }
 
 div[id^='box_']{
 	height: 250px;
+	background-repeat:no-repeat;
+	background-position:center bottom;
 }
 
-ul[id^='menubox-']{
-	padding-top:8px;
-	padding-bottom:25px;
-	max-width:262px;
-}
-
-
-body { background-color:#DDD; }
+body { background-color:#fff; }
 [class*="col"] { margin-bottom: 20px; }
 img { width: 100%; }
 
@@ -61,6 +56,13 @@ input {
 .row{
 	text-align: center;
 }
-	
+
+[class*="col"] {
+	margin-bottom:0px;
+}
+
+.form1 {
+	margin-bottom:20px;
+}
 
 

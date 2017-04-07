@@ -28,7 +28,7 @@ while ($donnees = $request->fetch())
 		</div>';
 	}
 	else {
-		echo '<div id="box_' . $donnees['ID'] . '" class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+		echo '<div id="box_' . $donnees['ID'] . '" class="col-xs-6 col-sm-4 col-md-3 col-lg-3"style="background-image: url(\'uploads/'. $image .'\');">
 		<p id="objectifdate-' . $donnees['ID'] .'" data-id-objectifdate="'. $donnees['ID'] .'" style="cursor:pointer">' . $donnees['objectif'] . '<br />' . $donnees['datetri'] . '</p>
 			
 			<ul id="menubox-'. $donnees['ID'] .'" data-id-menubox="'. $donnees['ID'] .'" style="display:none;" class="menu-objectif">
@@ -44,5 +44,3 @@ while ($donnees = $request->fetch())
 		</div>';		
 	}
 }
-
-/* style="background-image: url(\'uploads/'. $image .'\');" */

@@ -9,9 +9,13 @@
 }
 
 div[id^='box_']{
-	height: 250px;
+	height: 230px;
 	background-repeat:no-repeat;
 	background-position:center bottom;
+}
+
+p[id^='objectifdate-']{
+	font-size: 18px;
 }
 
 body { background-color:#fff; }
@@ -22,6 +26,10 @@ img { width: 100%; }
 h1, h2, h3 {
 	 text-align:center;
 } 
+
+h2 {
+	margin-bottom:20px;
+}
 	
 h3 {
 	 margin-bottom:40px;
@@ -35,6 +43,20 @@ p {
 input {
 	padding: 5px;
 	margin-bottom : 10px;
+}
+
+.generate-input {
+	padding: 12px;
+	margin-top: 25px;
+    margin-bottom: 25px;
+	text-align: center;
+	font-size: 1.4em;
+}
+
+.generate-submit {
+	padding: 12px;
+    margin-bottom: 25px;
+	font-size: 1.4em;
 }
 	
 .button {
@@ -65,4 +87,36 @@ input {
 	margin-bottom:20px;
 }
 
+.dropzone {
+	min-height: 110px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 
+
+
+
+@media (max-width: 1199px) {
+	div[id^='box_']{
+		background-size: 212px;
+		height: 200px;
+	}
+	.menu-objectif{
+		padding-top: 0px;
+	}
+}
+
+@media (max-width: 991px) {
+	div[id^='box_']{
+			background-size: 218px;
+			height: 200px;
+		}
+		
+	p[id^='objectifdate-']{	
+		margin-bottom: 5px;
+	}
+	
+	.menu-objectif{
+		padding-top: 3px;
+	}
+}

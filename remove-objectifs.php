@@ -1,12 +1,4 @@
-<?php
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=illdobdd', 'root', '');
-}
-catch(Exception $e)
-{
-	die('Erreur : ' . $e->getMessage());
-}		
+<?php require_once 'db.php';
 
  // Suppression
 

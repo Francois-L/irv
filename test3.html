@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <title>Le titre du document</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
-	<script src="jquery-3.1.1.js"></script>
-	<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-	<script src="bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
-	<script src="bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
-	<script src="dropzone.js"></script>
-	<link href="dropzone.css" type="text/css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap-3.3.7/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
+	<script src="js/jquery-3.1.1.js"></script>
+	<script src="bootstrap/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="bootstrap/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js"></script>
+	<script src="js/dropzone.js"></script>
+	<link href="css/dropzone.css" type="text/css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	
 </head>
 
@@ -23,14 +23,13 @@
     </header>
   </div>
 
-		<form action="uploads"
-		class="dropzone"></form>
+		<form action="uploads" class="dropzone"></form>
 	  
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
 			<form id="form1" class="generate" method="post" action="save-objectifs.php">
-				<input type="text" name="objectif" class="generate-input" placeholder="Objectif" maxlength="35" />
+				<input type="text" name="objectif" class="generate-input" placeholder="Objectif" maxlength="50" />
 				<input type="text" id="datepicker" class="generate-input" placeholder="Fin" />
 				<input type="hidden" name="sendObjectif" id="sendObjectif" />
 				<input type="hidden" name="sendDate" id="sendDate" />
@@ -189,7 +188,7 @@ function loadTargets() {
  		  jQuery("li[id^='delete-']").click(deleteTarget);
 		  jQuery("li[id^='over-']").click(endTarget);
 		  initImageForms();
-				  jQuery.getScript("dropzone.js", function( data, textStatus, jqxhr ) {
+				  jQuery.getScript("js/dropzone.js", function( data, textStatus, jqxhr ) {
 					  console.log( textStatus ); // Success
 					  console.log( jqxhr.status ); // 200
 					  console.log( "Load was performed." );

@@ -8,8 +8,8 @@ error_reporting(E_ALL | E_STRICT);
 
 // Configuration de l'upload
 $UPLOAD_DIRECTORY = __DIR__.'/uploads/';
-$UPLOAD_MAX_SIZE = 900400; // octets
-$UPLOAD_EXTENSIONS = ['png','jpg','jpeg'];
+$UPLOAD_MAX_SIZE = 5000000; // octets
+$UPLOAD_EXTENSIONS = ['png','gif','jpg','jpeg'];
 
 function upload($index, $directory, $filename, $maxsize, $extensions)
 {
@@ -37,6 +37,11 @@ function upload($index, $directory, $filename, $maxsize, $extensions)
    
 
 
+
+   
+   
+	
+
    // Déplacement
    $fullname = $filename.'.'.$ext;
    if(move_uploaded_file($_FILES[$index]['tmp_name'], $directory.$fullname)) {
@@ -54,10 +59,10 @@ $filename = upload('target_picture', $UPLOAD_DIRECTORY, $idTarget, $UPLOAD_MAX_S
 if ($filename !== false) {
 
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=illdobdd', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+        require_once 'db.php';
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
-    }
+    } 
 
 	$query = "UPDATE illdo SET image=:filename WHERE id=:id";
     $req = $bdd->prepare($query);
@@ -69,8 +74,6 @@ if ($filename !== false) {
 } else {
     echo 'KO';
 }
-
-
  
 
 exit(0);

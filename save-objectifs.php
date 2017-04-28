@@ -1,12 +1,4 @@
-<?php
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=illdobdd', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-}
-catch(Exception $e)
-{
-	die('Erreur : ' . $e->getMessage());
-}
+<?php require_once 'db.php';
 
 $sendObjectif = !empty($_POST['sendObjectif']) ? $_POST['sendObjectif'] : NULL;
 
